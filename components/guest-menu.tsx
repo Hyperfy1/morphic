@@ -22,6 +22,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 
 import { ExternalLinkItems } from './external-link-items'
+import { SpeechMenuItem } from './speech-menu-item'
 import { ThemeMenuItems } from './theme-menu-items'
 
 export default function GuestMenu() {
@@ -50,6 +51,7 @@ export default function GuestMenu() {
             <ThemeMenuItems />
           </DropdownMenuSubContent>
         </DropdownMenuSub>
+        <SpeechMenuItem />
         <DropdownMenuSub>
           <DropdownMenuSubTrigger>
             <Link2 className="size-4" />

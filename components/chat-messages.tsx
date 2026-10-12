@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { UseChatHelpers } from '@ai-sdk/react'
 
 import { useMediaQuery } from '@/lib/hooks/use-media-query'
+import { speak, stopSpeaking, useSpeechEnabled } from '@/lib/speech-output'
 import type { UIDataTypes, UIMessage, UITools } from '@/lib/types/ai'
 import { cn } from '@/lib/utils'
 import { extractCitationMapsFromMessages } from '@/lib/utils/citation'
@@ -91,6 +92,37 @@ export function ChatMessages({
 
     return () => observer.disconnect()
   }, [scrollContainerRef])
+
+  const speechEnabled = useSpeechEnabled()
+  const [isSpeaking, setIsSpeaking] = useState(false)
+  const wasLoadingRef = useRef(false)
+  const latestAssistantMessage = sections.at(-1)?.assistantMessages.at(-1)
+
+  // Speak the finished reply; cancel when a new reply starts, on toggle-off, or unmount
+  useEffect(() => {
+    if (isLoading) {
+      wasLoadingRef.current = true
+      stopSpeaking()
+      return
+    }
+    if (!wasLoadingRef.current) return
+    wasLoadingRef.current = false
+    if (!speechEnabled) return
+    const text = (latestAssistantMessage?.parts ?? [])
+      .filter(part => part.type === 'text')
+      .map(part => (part as { text: string }).text)
+      .join('\n')
+    speak(text, {
+      onStart: () => setIsSpeaking(true),
+      onEnd: () => setIsSpeaking(false)
+    })
+  }, [isLoading, speechEnabled, latestAssistantMessage])
+
+  useEffect(() => {
+    if (!speechEnabled) stopSpeaking()
+  }, [speechEnabled])
+
+  useEffect(() => () => stopSpeaking(), [])
 
   // Clear cache during streaming to ensure accurate tool counts
   useEffect(() => {
@@ -279,6 +311,7 @@ export function ChatMessages({
                 <AnimatedLogo
                   className="size-10 shrink-0"
                   animate={isLoading}
+                  speaking={isSpeaking && speechEnabled && !isLoading}
                 />
                 <ChatFooterMessage isLoading={isLoading} />
               </div>
