@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFD700"/><stop offset="50%" stop-color="#B8860B"/><stop offset="100%" stop-color="#FFF1A8"/>
+    </linearGradient>
+    <linearGradient id="h" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00FFFF"/><stop offset="50%" stop-color="#FF00FF"/><stop offset="100%" stop-color="#FFD700"/>
+    </linearGradient>
+    <filter id="f" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <circle cx="128" cy="128" r="128" fill="#000"/>
+  <g filter="url(#f)" fill="none" stroke-linecap="round">
+    <g opacity="0.85" stroke="url(#g)" stroke-width="26"><path d="M166 84C166 58 90 56 90 100C90 134 166 122 166 158C166 202 88 198 88 170"/><path d="M128 40V216" stroke-width="16"/></g>
+    <g opacity="0.25" stroke="url(#h)" stroke-width="10"><path d="M166 84C166 58 90 56 90 100C90 134 166 122 166 158C166 202 88 198 88 170"/><path d="M128 40V216" stroke-width="6"/></g>
+  </g>
+  <circle cx="102" cy="128" r="18" fill="#00FF55"/><circle cx="154" cy="128" r="18" fill="#00FF55"/>
+</svg>

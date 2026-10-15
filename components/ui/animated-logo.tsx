@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 
 import { cn } from '@/lib/utils'
 
+import { DollarLogoArt, EYE_COLOR } from './dollar-logo'
+
 export function AnimatedLogo({
   animate = true,
   className,
@@ -53,31 +55,32 @@ export function AnimatedLogo({
       className={cn('size-8', className)}
       {...props}
     >
-      <circle cx="128" cy="128" r="128" fill="black"></circle>
-      <g
-        className={cn(
-          'origin-center',
-          animate &&
-            'animate-[lookAround_2.8s_var(--motion-ease-in-out)_infinite] will-change-transform motion-reduce:animate-none motion-reduce:will-change-auto'
-        )}
-      >
-        <ellipse
-          cx="102"
-          cy="128"
-          rx="18"
-          ry="18"
-          fill="white"
-          className={cn(!animate && isBlinking && 'animate-blink')}
-        ></ellipse>
-        <ellipse
-          cx="154"
-          cy="128"
-          rx="18"
-          ry="18"
-          fill="white"
-          className={cn(!animate && isBlinking && 'animate-blink')}
-        ></ellipse>
-      </g>
+      <DollarLogoArt>
+        <g
+          className={cn(
+            'origin-center',
+            animate &&
+              'animate-[lookAround_2.8s_var(--motion-ease-in-out)_infinite] will-change-transform motion-reduce:animate-none motion-reduce:will-change-auto'
+          )}
+        >
+          <ellipse
+            cx="102"
+            cy="128"
+            rx="18"
+            ry="18"
+            fill={EYE_COLOR}
+            className={cn(!animate && isBlinking && 'animate-blink')}
+          ></ellipse>
+          <ellipse
+            cx="154"
+            cy="128"
+            rx="18"
+            ry="18"
+            fill={EYE_COLOR}
+            className={cn(!animate && isBlinking && 'animate-blink')}
+          ></ellipse>
+        </g>
+      </DollarLogoArt>
     </svg>
   )
 }
