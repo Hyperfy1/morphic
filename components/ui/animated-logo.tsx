@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from '@/lib/hooks/use-media-query'
 import { cn } from '@/lib/utils'
 
-import { Mascot, MAX_EYE_OFFSET } from './mascot'
+import { DollarLogoArt, EYE_COLOR } from './dollar-logo'
 
 export function AnimatedLogo({
   animate = true,
@@ -105,6 +105,34 @@ export function AnimatedLogo({
       mouthOpen={mouth}
       blinking={isBlinking && !talking}
       {...props}
+    >
+      <DollarLogoArt>
+        <g
+          className={cn(
+            'origin-center',
+            animate &&
+              'animate-[lookAround_2.8s_var(--motion-ease-in-out)_infinite] will-change-transform motion-reduce:animate-none motion-reduce:will-change-auto'
+          )}
+        >
+          <ellipse
+            cx="102"
+            cy="128"
+            rx="18"
+            ry="18"
+            fill={EYE_COLOR}
+            className={cn(!animate && isBlinking && 'animate-blink')}
+          ></ellipse>
+          <ellipse
+            cx="154"
+            cy="128"
+            rx="18"
+            ry="18"
+            fill={EYE_COLOR}
+            className={cn(!animate && isBlinking && 'animate-blink')}
+          ></ellipse>
+        </g>
+      </DollarLogoArt>
+    </svg>
     />
   )
 }
