@@ -34,6 +34,7 @@ import { UsageDialog } from '@/components/usage-dialog'
 
 import { Button } from './ui/button'
 import { ExternalLinkItems } from './external-link-items'
+import { SpeechMenuItem } from './speech-menu-item'
 
 interface UserMenuProps {
   user: AppUser
@@ -154,6 +155,7 @@ export default function UserMenu({ user }: UserMenuProps) {
               </span>
             </DropdownMenuItem>
           )}
+          <SpeechMenuItem />
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>
               <Link2 className="size-4" />
